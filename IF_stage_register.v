@@ -1,4 +1,4 @@
-module IF_stage_register(
+module IF_stage_reg(
   input clk, rst, freeze, flush, 
   input [31:0] PC_in, Instruction_in, 
   output reg [31:0] PC_out, Instruction_out

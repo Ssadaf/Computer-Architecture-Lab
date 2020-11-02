@@ -1,4 +1,4 @@
-module ID_stage_register(
+module ID_stage_reg(
   input clk, rst, flush, 
   input [31:0] PC_in,
   output reg [31:0] PC_out

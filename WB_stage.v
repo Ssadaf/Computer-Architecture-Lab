@@ -3,7 +3,6 @@ module WB_stage (
   input [31:0] PC_in, 
   output [31:0] PC_out
 );
-  always@(PC_in) begin 
-    PC_out = PC_in;
-  end
+  assign PC_out = PC_in;
+
 endmodule

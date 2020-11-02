@@ -1,4 +1,4 @@
-module exec_stage_register(
+module exec_stage_reg(
   input clk, rst,
   input [31:0] PC_in,
   output reg [31:0] PC_out
