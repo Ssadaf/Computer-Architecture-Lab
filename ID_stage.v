@@ -5,5 +5,5 @@ module ID_stage (
 );
  
   assign   PC_out = PC_in;
- 
+  
 endmodule
