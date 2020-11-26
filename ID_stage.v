@@ -9,16 +9,16 @@ module ID_stage (
   input [3:0] status, // Z N C V	
 
   output [31:0] PC_out,
-  output wb_enable, 
+  output wb_enable,
   output reg mem_read, mem_write, B, S, imm,
   output reg [3:0] exec_cmd,
   output [31:0] val_Rn, val_Rm,
   output [3:0] Rd,
   output [11:0] shift_operand,
-  output [23:0] signed_imm_24,
+  output [23:0] signed_imm_24
   //TODO: hazard
-  output [3:0] src1, src2,
-  output two_src 
+  //,output [3:0] src1, src2,
+  //output two_src 
 );
 	wire [3:0] cu_exec_cmd;
 	reg [3:0] src2_mux_out;
