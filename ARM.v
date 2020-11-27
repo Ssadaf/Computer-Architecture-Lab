@@ -22,7 +22,7 @@ wire [11:0] shift_operand_ID_out;
 wire [23:0] signed_imm_24_ID_out;
 
 wire wb_enable_exec_in, mem_read_exec_in, mem_write_exec_in, B_exec_in, S_exec_in, imm_exec_in;
-wire [3:0] exec_cmd_exec_in, Rd_exec_in;
+wire [3:0] exec_cmd_exec_in, Rd_exec_in, status_exec_in;
 wire [31:0] val_Rn_exec_in, val_Rm_exec_in;
 wire [11:0] shift_operand_exec_in;
 wire [23:0] signed_imm_24_exec_in;
@@ -36,11 +36,12 @@ exec_cmd_ID_out, val_Rn_ID_out, val_Rm_ID_out, Rd_ID_out, shift_operand_ID_out, 
 
 ID_stage_reg ID_reg(clk, rst, branch_taken, PC_ID_out, wb_enable_ID_out, mem_read_ID_out,
 mem_write_ID_out, B_ID_out, S_ID_out, imm_ID_out, exec_cmd_ID_out, val_Rn_ID_out,val_Rm_ID_out,
-Rd_ID_out, shift_operand_ID_out, signed_imm_24_ID_out,
+Rd_ID_out, shift_operand_ID_out, signed_imm_24_ID_out, status,
 PC_exec_in, wb_enable_exec_in, mem_read_exec_in, mem_write_exec_in, B_exec_in, S_exec_in,
 imm_exec_in, exec_cmd_exec_in, Rd_exec_in, val_Rn_exec_in, val_Rm_exec_in,
-shift_operand_exec_in, signed_imm_24_exec_in);
+shift_operand_exec_in, signed_imm_24_exec_in, status_exec_in);
 
+// Rd(dest), wb_enable, mem_read, mem_write and val_Rm should be connected to register directly
 exec_stage exec(clk, rst, PC_exec_in, PC_exec_out);
 exec_stage_reg exec_reg(clk, rst, PC_exec_out, PC_mem_in);
 
