@@ -16,7 +16,7 @@ module ID_stage_reg(
   output reg [3:0] Rd_out,
   output reg [11:0] shift_operand_out,
   output reg [23:0] signed_imm_24_out,
-  output reg [3:0] status_out,
+  output reg [3:0] status_out
 );
   always@(posedge clk, posedge rst) begin
     if(rst)begin
