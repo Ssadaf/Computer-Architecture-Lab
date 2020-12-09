@@ -6,13 +6,36 @@ module exec_stage (
   input [31:0] val_Rn, val_Rm,
   input [11:0] shift_operand,
   input [23:0] signed_imm_24,
-  input [3:0] status_in,
+  input C_in,
 
   output[31:0] PC_out,
   output [31:0] ALU_res, branch_addr,
-  output [3:0] ALU_status
+  output C_out, V, Z, N
 );
 
-assign   PC_out = PC_in;
+wire [31:0] val2;
+wire load_store;
+wire [31:0] extended_signed_im;
+
+assign PC_out = PC_in;
+assign load_store = mem_write || mem_read;
+assign extended_signed_im = {{8{signed_imm_24[23]}}, signed_imm_24} << 2;
+
+val2_generator val2_gen(
+  val_Rm,
+  shift_operand,
+  imm, load_store,
+  val2
+);
+
+ALU alu(
+	val_Rn, val2,
+	exec_cmd,
+	C_in,
+	ALU_res,
+	C_out, V, Z, N
+);
+
+assign branch_addr = PC_in + extended_signed_im;
 
 endmodule

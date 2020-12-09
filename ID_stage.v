@@ -6,7 +6,7 @@ module ID_stage (
   input write_back,
   input [3:0] dest_wb,
   input hazard, 
-  input [3:0] status, // Z N C V	
+  input Z, N, C,V,	
 
   output [31:0] PC_out,
   output wb_enable,
@@ -30,7 +30,7 @@ module ID_stage (
 	control_unit cu(instruction[27:26], instruction[24:21], instruction[20], instruction[25],
 	cu_exec_cmd, cu_mem_read, cu_mem_write, cu_wb_enable, cu_imm, cu_B, cu_S);
 	
-	condition_check cc(status[3], status[2], status[1], status[0], instruction[31:28], cond_matched);
+	condition_check cc(Z, N, C,V, instruction[31:28], cond_matched);
 
 	// MUX
 	always @(*) begin

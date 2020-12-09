@@ -36,7 +36,7 @@ module ALU(
 	      	end
 
 	      	4'b0101  : begin //SBC
-	      	{C_out, ALU_res} <= val1 - val2 - 1;
+	      	{C_out, ALU_res} <= val1 - val2 - C_in;
 			V <= (!val1[31] & val2[31] & ALU_res[31]) || (val1[31] & !val2[31] & !ALU_res[31]);
 	      	end
 
