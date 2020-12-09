@@ -9,8 +9,10 @@ module ID_stage (
   input Z, N, C,V,	
 
   output [31:0] PC_out,
-  output wb_enable,
-  output reg mem_read, mem_write, B, S, imm,
+  output reg wb_enable,
+  output reg mem_read, 
+  output mem_write, 
+  output reg B, S, imm,
   output reg [3:0] exec_cmd,
   output [31:0] val_Rn, val_Rm,
   output [3:0] Rd,
@@ -22,7 +24,7 @@ module ID_stage (
 	wire [3:0] cu_exec_cmd;
 	reg [3:0] src2_mux_out;
 	wire cu_mem_read, cu_mem_write, cu_wb_enable, cu_imm, cu_B, cu_S, cond_matched; 
-	reg wb_enable_mux_out;
+	reg mem_write_mux_out;
 
 	assign PC_out = PC_in;
 	
@@ -33,27 +35,27 @@ module ID_stage (
 	control_unit cu(instruction[27:26], instruction[24:21], instruction[20], instruction[25],
 	cu_exec_cmd, cu_mem_read, cu_mem_write, cu_wb_enable, cu_imm, cu_B, cu_S);
 	
-	condition_check cc(Z, N, C,V, instruction[31:28], cond_matched);
+	condition_check cc(Z, N, C, V, instruction[31:28], cond_matched);
 
 	// MUX
 	always @(*) begin
 		if(hazard || !cond_matched) begin
-			{wb_enable_mux_out, mem_read, mem_write, exec_cmd, B, S, imm} <= 10'b0;
+			{wb_enable, mem_read, mem_write_mux_out, exec_cmd, B, S, imm} <= 10'b0;
 		end
 
 		else begin
-			{wb_enable_mux_out, mem_read, mem_write, exec_cmd, B, S, imm} <= {cu_wb_enable, cu_mem_read, cu_mem_write, cu_exec_cmd, cu_B, cu_S, cu_imm};
+			{wb_enable, mem_read, mem_write_mux_out, exec_cmd, B, S, imm} <= {cu_wb_enable, cu_mem_read, cu_mem_write, cu_exec_cmd, cu_B, cu_S, cu_imm};
 		end
 	end
 
 	// MUX
 	always @(*) begin
-		if(wb_enable_mux_out) begin //TEST
+		if(mem_write_mux_out) begin //TEST
 			src2_mux_out <= instruction[15:12];
 		end
 
 		else begin
-			src2_mux_out <= instruction[19:16];
+			src2_mux_out <= instruction[3:0];
 		end
 	end
 
@@ -62,6 +64,6 @@ module ID_stage (
 	assign signed_imm_24 = instruction[23:0];
 	assign Rd = instruction[15:12];
 	assign shift_operand = instruction[11:0];
-	assign wb_enable = wb_enable_mux_out;
+	assign mem_write = mem_write_mux_out;
 
 endmodule

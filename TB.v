@@ -5,7 +5,7 @@ module TB();
   initial begin
     #10 rst = ~rst;
   end 
-  initial repeat(50)begin
+  initial repeat(250)begin
     #20 clk = ~clk;
   end
 endmodule

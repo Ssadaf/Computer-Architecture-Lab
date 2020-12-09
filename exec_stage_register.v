@@ -8,7 +8,7 @@ module exec_stage_reg(
   	output reg [31:0] PC_out,
   	output reg wb_enable_out, mem_read_out, mem_write_out,
 	output reg [31:0] ALU_res_out, val_Rm_out,
-	output reg [3:0 ] Rd_out
+	output reg [3:0] Rd_out
 );
   always@(posedge clk, posedge rst) begin
     if(rst)begin

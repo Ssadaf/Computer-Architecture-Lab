@@ -36,13 +36,15 @@ wire [31:0] ALU_result_wb_in, mem_result_wb_in;
 
 wire [3:0] Rd_mem_in;
 wire wb_enable_mem_in;
+wire [31:0] val_Rm_mem_in;
+wire [31:0] ALU_res_mem_in;
 wire [31:0] mem_result_mem_out;
 
 IF_stage IF(clk, rst, hazard, B_exec_in, branch_addr_exec_out, PC_IF_out, inst_IF);
 IF_stage_reg IF_reg(clk, rst, hazard, B_exec_in, PC_IF_out, inst_IF, PC_ID_in, inst_ID);
 
 status_register sr(
-clk, C_exec_out, V_exec_out, Z_exec_out, N_exec_out, 
+clk, rst, C_exec_out, V_exec_out, Z_exec_out, N_exec_out, 
 S_exec_in,
 C, V, Z, N);
 
@@ -55,7 +57,7 @@ ID_stage_reg ID_reg(clk, rst, B_exec_in, PC_ID_out, wb_enable_ID_out, mem_read_I
 mem_write_ID_out, B_ID_out, S_ID_out, imm_ID_out, exec_cmd_ID_out, val_Rn_ID_out,val_Rm_ID_out,
 Rd_ID_out, shift_operand_ID_out, signed_imm_24_ID_out, C,
 PC_exec_in, wb_enable_exec_in, mem_read_exec_in, mem_write_exec_in, B_exec_in, S_exec_in,
-imm_exec_in, exec_cmd_exec_in, Rd_exec_in, val_Rn_exec_in, val_Rm_exec_in,
+imm_exec_in, exec_cmd_exec_in, val_Rn_exec_in, val_Rm_exec_in, Rd_exec_in,
 shift_operand_exec_in, signed_imm_24_exec_in, C_exec_in);
 
 

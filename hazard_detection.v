@@ -12,7 +12,7 @@ module hazard_detection_unit (
       (mem_wb_enable && mem_dest==src2 && two_src)
       ) 
     begin
-        hazard <= 0; // CHANGE BACK TO 1
+        hazard <= 1; // CHANGE BACK TO 1
     end
     else begin
       hazard <= 0;
