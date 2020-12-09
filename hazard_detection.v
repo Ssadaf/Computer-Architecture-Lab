@@ -1,4 +1,3 @@
-// MEM_W_EN: before mux!
 module hazard_detection_unit (
   input [3:0] src1, src2, exec_dest, mem_dest,
   input exec_wb_enable, mem_wb_enable, two_src,
@@ -13,7 +12,7 @@ module hazard_detection_unit (
       (mem_wb_enable && mem_dest==src2 && two_src)
       ) 
     begin
-        hazard <= 1;
+        hazard <= 0; // CHANGE BACK TO 1
     end
     else begin
       hazard <= 0;
