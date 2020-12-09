@@ -1,12 +1,12 @@
 module status_register(
-	input C_in, V_in, Z_in, N_in, S,
+	input clk, C_in, V_in, Z_in, N_in, S,
 
 	output C_out, V_out, Z_out, N_out
 );
 
 	reg C, V, Z, N;
 
-	always @(*) begin
+	always @(negedge clk) begin
 		if(S) begin //TEST
 			C <= C_in;	
 			V <= V_in;	

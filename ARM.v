@@ -42,7 +42,7 @@ IF_stage IF(clk, rst, hazard, B_exec_in, branch_addr_exec_out, PC_IF_out, inst_I
 IF_stage_reg IF_reg(clk, rst, hazard, B_exec_in, PC_IF_out, inst_IF, PC_ID_in, inst_ID);
 
 status_register sr(
-C_exec_out, V_exec_out, Z_exec_out, N_exec_out, 
+clk, C_exec_out, V_exec_out, Z_exec_out, N_exec_out, 
 S_exec_in,
 C, V, Z, N);
 
