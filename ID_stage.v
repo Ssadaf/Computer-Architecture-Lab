@@ -16,9 +16,8 @@ module ID_stage (
   output [3:0] Rd,
   output [11:0] shift_operand,
   output [23:0] signed_imm_24
-  //TODO: hazard
-  //,output [3:0] src1, src2,
-  //output two_src 
+  output [3:0] src1, src2,
+  output two_src 
 );
 	wire [3:0] cu_exec_cmd;
 	reg [3:0] src2_mux_out;
@@ -26,6 +25,10 @@ module ID_stage (
 	reg wb_enable_mux_out;
 
 	assign PC_out = PC_in;
+	
+	assign src1 = instruction[19:16];
+	assign src2 = src2_mux_out;
+	assign two_src = cu_mem_write || !cu_imm;
 	
 	control_unit cu(instruction[27:26], instruction[24:21], instruction[20], instruction[25],
 	cu_exec_cmd, cu_mem_read, cu_mem_write, cu_wb_enable, cu_imm, cu_B, cu_S);
