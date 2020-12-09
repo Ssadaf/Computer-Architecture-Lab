@@ -15,7 +15,7 @@ module ID_stage (
   output [31:0] val_Rn, val_Rm,
   output [3:0] Rd,
   output [11:0] shift_operand,
-  output [23:0] signed_imm_24
+  output [23:0] signed_imm_24,
   output [3:0] src1, src2,
   output two_src 
 );
