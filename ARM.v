@@ -40,7 +40,7 @@ wire [3:0] Rd_mem_in;
 wire wb_enable_mem_in;
 wire [31:0] val_Rm_mem_in;
 wire [31:0] ALU_res_mem_in;
-wire [31:0] mem_result_mem_out;
+wire [31:0] mem_result_mem_out, wb_result_mem_out;
 
 wire [1:0] sel_src1, sel_src2;
 
@@ -73,7 +73,7 @@ shift_operand_exec_in,
 signed_imm_24_exec_in,
 C_exec_in,
 sel_src1, sel_src2,
-ALU_res_mem_in, wb_result_WB_out,
+wb_result_mem_out, wb_result_WB_out,
 PC_exec_out, 
 ALU_res_exec_out, branch_addr_exec_out, 
 C_exec_out, V_exec_out, Z_exec_out, N_exec_out, val_Rm_exec_out);
@@ -86,7 +86,7 @@ wb_enable_mem_in, mem_read_mem_in, mem_write_mem_in,
 ALU_res_mem_in, val_Rm_mem_in, Rd_mem_in);
 
 mem_stage mem(clk, rst, PC_mem_in, ALU_res_mem_in, val_Rm_mem_in, mem_read_mem_in, mem_write_mem_in,
-PC_mem_out, mem_result_mem_out);
+PC_mem_out, mem_result_mem_out, wb_result_mem_out);
 
 mem_stage_reg mem_reg(clk, rst, PC_mem_out, mem_read_mem_in, wb_enable_mem_in, Rd_mem_in, 
 ALU_res_mem_in, mem_result_mem_out,
