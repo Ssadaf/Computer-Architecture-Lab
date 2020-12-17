@@ -8,7 +8,7 @@ module exec_stage (
   input [23:0] signed_imm_24,
   input C_in,
   input [1:0] sel_src1, sel_src2,
-  input [3:0] MEM_wb_val, WB_wb_val,
+  input [31:0] MEM_wb_val, WB_wb_val,
 
   output[31:0] PC_out,
   output [31:0] ALU_res, branch_addr,
@@ -20,7 +20,7 @@ module exec_stage (
 wire [31:0] val2;
 wire load_store;
 wire [31:0] extended_signed_im;
-reg [3:0] src1_mux_out, src2_mux_out;
+reg [31:0] src1_mux_out, src2_mux_out;
 
 assign PC_out = PC_in;
 assign load_store = mem_write || mem_read;
