@@ -1,5 +1,6 @@
 module ARM (
-  input clk, rst
+  input clk, rst,
+  input forwarding
 );
 
 wire hazard;
@@ -88,7 +89,7 @@ PC_WB_in, mem_read_wb_in, wb_enable_wb_in, wb_dest_wb_in, ALU_result_wb_in, mem_
 
 WB_stage WB(clk, rst, PC_WB_in, mem_read_wb_in, mem_result_wb_in, ALU_result_wb_in, PC_WB_out, wb_result_WB_out);
 
-hazard_detection_unit hazard_detect(src1_ID_out, src2_ID_out, Rd_exec_in, Rd_mem_in, 
+hazard_detection_unit hazard_detect(forwarding, src1_ID_out, src2_ID_out, Rd_exec_in, Rd_mem_in, 
 wb_enable_exec_in, wb_enable_mem_in, two_src_ID_out, hazard);
 
 endmodule
